@@ -7,6 +7,7 @@
 
   var waNumber = String(C.whatsapp || "").replace(/\D/g, "");
   var telNumber = String(C.phone || "").replace(/[^\d+]/g, "");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Business details from config.js ---------- */
   $$("[data-text]").forEach(function (el) {
@@ -25,12 +26,14 @@
     }
   });
 
-  if (C.businessName) {
-    document.title = C.businessName + " — Solar Panel Sales, Installation & Service";
+  // Page titles are written with the default name; swap in the configured one.
+  var DEFAULT_NAME = "Surya Solar Solutions";
+  if (C.businessName && C.businessName !== DEFAULT_NAME) {
+    document.title = document.title.replace(DEFAULT_NAME, C.businessName);
   }
 
-  if (C.mapQuery) {
-    var map = $(".map");
+  var map = $(".map");
+  if (map && C.mapQuery) {
     map.querySelector("iframe").src =
       "https://maps.google.com/maps?q=" + encodeURIComponent(C.mapQuery) + "&z=15&output=embed";
     map.hidden = false;
@@ -38,6 +41,7 @@
 
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
+  // Smooth scrolling only after load, so opening a page at a #section jumps straight there.
   window.addEventListener("load", function () {
     setTimeout(function () { document.documentElement.classList.add("ready"); }, 50);
   });
@@ -54,7 +58,7 @@
     email: C.email,
     address: C.address,
     openingHours: C.hours,
-    url: location.origin + location.pathname,
+    url: location.origin + location.pathname.replace(/[^/]*$/, ""),
   });
   document.head.appendChild(ld);
 
@@ -62,39 +66,23 @@
   var header = $("#site-header");
   var toggle = $(".menu-toggle");
 
-  function onScroll() { header.classList.toggle("scrolled", window.scrollY > 8); }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  if (header && toggle) {
+    var onScroll = function () { header.classList.toggle("scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
-  function setMenu(open) {
-    header.classList.toggle("nav-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  }
-  toggle.addEventListener("click", function () { setMenu(!header.classList.contains("nav-open")); });
-  $$("#nav a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
-
-  /* ---------- Highlight the nav link for the section in view ---------- */
-  var navLinks = $$('#nav a[href^="#"]:not(.btn)');
-  if ("IntersectionObserver" in window) {
-    var sectionObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(function (a) {
-          a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
-        });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    navLinks.forEach(function (a) {
-      var target = $(a.getAttribute("href"));
-      if (target) sectionObserver.observe(target);
-    });
+    var setMenu = function (open) {
+      header.classList.toggle("nav-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    toggle.addEventListener("click", function () { setMenu(!header.classList.contains("nav-open")); });
+    $$("#nav a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
   }
 
   /* ---------- Scroll reveal ---------- */
   var reveals = $$(".reveal");
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion || !("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("is-visible"); });
   } else {
@@ -107,8 +95,8 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
     reveals.forEach(function (el) { revealObserver.observe(el); });
 
-    // Opening the page at a section link (e.g. /#quote) jumps past the observer,
-    // so reveal anything that is already on or above the screen.
+    // Opening a page at a section link (e.g. services.html#survey) jumps past the
+    // observer, so reveal anything that is already on or above the screen.
     var revealInView = function () {
       reveals.forEach(function (el) {
         if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-visible");
@@ -119,9 +107,9 @@
     window.addEventListener("hashchange", function () { setTimeout(revealInView, 700); });
   }
 
-  /* ---------- Project filter ---------- */
+  /* ---------- Project filter (Projects page) ---------- */
   var filters = $$(".filter");
-  var projects = $$(".project");
+  var projects = $$(".project[data-type]");
   filters.forEach(function (btn) {
     btn.addEventListener("click", function () {
       var type = btn.getAttribute("data-filter");
@@ -133,7 +121,7 @@
     });
   });
 
-  /* ---------- Solar size estimator ---------- */
+  /* ---------- Solar size estimator (Get a quote page) ---------- */
   var UNITS_PER_KW_MONTH = 120; // ~4 units per kW per day
   var SQFT_PER_KW = 100;
   var billEl = $("#est-bill");
@@ -142,6 +130,7 @@
   var inr = function (n) { return "₹" + Math.round(n).toLocaleString("en-IN"); };
 
   function calcEstimate() {
+    if (!billEl || !tariffEl) return;
     var bill = Number(billEl.value) || 0;
     var tariff = Math.max(1, Number(tariffEl.value) || 8);
     var units = bill / tariff;
@@ -159,17 +148,19 @@
     var pct = ((bill - billEl.min) / (billEl.max - billEl.min)) * 100;
     billEl.style.setProperty("--p", pct + "%");
   }
-  billEl.addEventListener("input", calcEstimate);
-  tariffEl.addEventListener("input", calcEstimate);
-  calcEstimate();
 
-  $("#est-apply").addEventListener("click", function () {
-    $("#q-bill").value = estimate.bill;
-    $("#q-size").value = "About " + estimate.kw + " kW (from website estimate)";
-    var form = $("#quote-form");
-    form.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-    setTimeout(function () { $("#q-name").focus({ preventScroll: true }); }, reduceMotion ? 0 : 500);
-  });
+  if (billEl && tariffEl) {
+    billEl.addEventListener("input", calcEstimate);
+    tariffEl.addEventListener("input", calcEstimate);
+    calcEstimate();
+
+    $("#est-apply").addEventListener("click", function () {
+      $("#q-bill").value = estimate.bill;
+      $("#q-size").value = "About " + estimate.kw + " kW (from website estimate)";
+      $("#quote-form").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      setTimeout(function () { $("#q-name").focus({ preventScroll: true }); }, reduceMotion ? 0 : 500);
+    });
+  }
 
   /* ---------- Lead forms (quote + contact) ---------- */
   function labelFor(form, name) {

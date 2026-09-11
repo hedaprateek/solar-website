@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get a Quote — Surya Solar Solutions</title>
+  <meta name="description" content="Get a free solar quote. Estimate the system size you need from your electricity bill, then request a free site survey and written proposal.">
+  <meta name="theme-color" content="#0E1B2C">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.className += ' js';</script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="quote">
+<script src="js/layout.js"></script>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Get a quote</span></nav>
+      <p class="eyebrow"><span class="dot"></span>Get a quote</p>
+      <h1>Tell us about your site — we'll send a free quote</h1>
+      <p class="lead">Share a few details and we'll call you back to arrange a free site survey and a written proposal. No obligation.</p>
+    </div>
+  </section>
+
+  <section class="section quote-section">
+    <div class="container">
+      <div class="quote-grid">
+        <aside class="quote-side">
+          <div class="estimator reveal" id="estimator">
+            <p class="eyebrow on-dark"><span class="dot"></span>Quick estimate</p>
+            <h3>What size system do you need?</h3>
+            <label class="est-label" for="est-bill">
+              <span>Average monthly electricity bill</span>
+              <output id="est-bill-out" for="est-bill">₹3,000</output>
+            </label>
+            <input type="range" class="range" id="est-bill" min="500" max="50000" step="500" value="3000">
+            <div class="est-row">
+              <label for="est-tariff">Your rate per unit (₹)</label>
+              <input type="number" id="est-tariff" min="3" max="20" step="0.5" value="8" inputmode="decimal">
+            </div>
+            <div class="est-results" aria-live="polite">
+              <div><strong id="est-kw">3.5 kW</strong><span>Suggested system</span></div>
+              <div><strong id="est-area">350 sq ft</strong><span>Shade-free roof needed</span></div>
+              <div><strong id="est-units">420</strong><span>Units generated / month</span></div>
+              <div><strong id="est-save">₹36,000</strong><span>Approx. savings / year</span></div>
+            </div>
+            <button type="button" class="btn btn-sun btn-block" id="est-apply">Use this in my quote</button>
+            <p class="est-note">Indicative only, assuming about 4 units per kW per day. Actual output depends on your location, shading and tilt — the free survey gives you exact figures.</p>
+          </div>
+
+          <div class="next-steps reveal">
+            <h3>What happens next</h3>
+            <ol>
+              <li><strong>We call you back</strong> to understand what you need.</li>
+              <li><strong>Free site survey</strong> at a time that suits you.</li>
+              <li><strong>Written proposal</strong> with design, components, price and timeline.</li>
+            </ol>
+          </div>
+        </aside>
+
+        <div class="form-card reveal">
+          <form id="quote-form" data-lead-form data-form-name="New quote request" autocomplete="on">
+            <div class="form-grid">
+              <div class="field">
+                <label for="q-name">Full name <span class="req">*</span></label>
+                <input id="q-name" name="name" data-label="Name" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="q-phone">Phone / WhatsApp <span class="req">*</span></label>
+                <input id="q-phone" name="phone" data-label="Phone" type="tel" required autocomplete="tel" pattern="[0-9+\-\s()]{10,16}" title="Enter a 10-digit mobile number">
+              </div>
+              <div class="field">
+                <label for="q-email">Email <span class="opt">(optional)</span></label>
+                <input id="q-email" name="email" data-label="Email" type="email" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="q-city">City / area &amp; PIN code <span class="req">*</span></label>
+                <input id="q-city" name="location" data-label="Location" required autocomplete="address-level2">
+              </div>
+              <div class="field">
+                <label for="q-property">Property type <span class="req">*</span></label>
+                <select id="q-property" name="property" data-label="Property" required>
+                  <option value="">Select…</option>
+                  <option>Independent house / villa</option>
+                  <option>Apartment / housing society</option>
+                  <option>Shop / office / commercial</option>
+                  <option>Factory / warehouse</option>
+                  <option>Farm / agriculture</option>
+                  <option>School / hospital / institution</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-roof">Where will panels go?</label>
+                <select id="q-roof" name="roof" data-label="Mounting surface">
+                  <option value="">Select…</option>
+                  <option>RCC / concrete roof</option>
+                  <option>Tin / metal-sheet shed</option>
+                  <option>Tiled roof</option>
+                  <option>Open ground</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-system">System type</label>
+                <select id="q-system" name="system" data-label="System type">
+                  <option value="">Select…</option>
+                  <option>On-grid (with net metering)</option>
+                  <option>Off-grid (with batteries)</option>
+                  <option>Hybrid (grid + battery backup)</option>
+                  <option>Solar water pump</option>
+                  <option>Not sure — please advise</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-bill">Monthly electricity bill (₹)</label>
+                <input id="q-bill" name="bill" data-label="Monthly bill (₹)" type="number" min="0" step="100" inputmode="numeric">
+              </div>
+              <div class="field full">
+                <label for="q-size">System size in mind <span class="opt">(optional)</span></label>
+                <input id="q-size" name="size" data-label="System size" placeholder="e.g. 5 kW, or leave blank and we'll size it for you">
+              </div>
+
+              <fieldset class="field full" data-label="Services needed">
+                <legend>What do you need? <span class="opt">(tick all that apply)</span></legend>
+                <div class="checks">
+                  <label class="check"><input type="checkbox" name="services" value="New solar installation">New solar installation</label>
+                  <label class="check"><input type="checkbox" name="services" value="Site survey">Site survey</label>
+                  <label class="check"><input type="checkbox" name="services" value="Structure fabrication">Structure fabrication</label>
+                  <label class="check"><input type="checkbox" name="services" value="Inverter / battery">Inverter / battery</label>
+                  <label class="check"><input type="checkbox" name="services" value="Electrical work">Electrical work</label>
+                  <label class="check"><input type="checkbox" name="services" value="Net metering / subsidy">Net metering / subsidy</label>
+                  <label class="check"><input type="checkbox" name="services" value="Cleaning / AMC">Cleaning / AMC</label>
+                  <label class="check"><input type="checkbox" name="services" value="Repair of existing system">Repair of existing system</label>
+                </div>
+              </fieldset>
+
+              <div class="field full">
+                <label for="q-msg">Anything else we should know?</label>
+                <textarea id="q-msg" name="message" data-label="Notes" rows="4" placeholder="Roof size, power-cut hours, when you'd like to start…"></textarea>
+              </div>
+
+              <fieldset class="field full" data-label="Preferred contact">
+                <legend>How should we contact you?</legend>
+                <div class="radios">
+                  <label class="check"><input type="radio" name="contact_pref" value="Phone call" checked>Phone call</label>
+                  <label class="check"><input type="radio" name="contact_pref" value="WhatsApp">WhatsApp</label>
+                  <label class="check"><input type="radio" name="contact_pref" value="Email">Email</label>
+                </div>
+              </fieldset>
+
+              <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            </div>
+
+            <div class="form-foot">
+              <p class="form-privacy">We only use your details to reply to this enquiry.</p>
+              <button type="submit" class="btn btn-sun btn-lg">Request my free quote <svg class="icon"><use href="#i-arrow"/></svg></button>
+            </div>
+            <div class="form-status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" id="faq">
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow"><span class="dot"></span>FAQ</p>
+        <h2>Questions we're often asked</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>How much roof space do I need?</summary>
+          <p>As a rule of thumb, about 80–100 sq ft of shade-free area per kW. A typical 3–5 kW home system needs roughly 300–500 sq ft. Our survey measures your actual usable area.</p>
+        </details>
+        <details>
+          <summary>What's the difference between on-grid, off-grid and hybrid?</summary>
+          <p>On-grid systems feed extra power to the electricity grid through a net meter and give the fastest payback, but switch off during power cuts. Off-grid systems run on batteries without the grid. Hybrid systems do both — net metering plus battery backup for outages.</p>
+        </details>
+        <details>
+          <summary>Is there a government subsidy for rooftop solar?</summary>
+          <p>Residential rooftop systems may qualify for central and state subsidy schemes, such as PM Surya Ghar. Eligibility and amounts change, so we check what applies to you and handle the application.</p>
+        </details>
+        <details>
+          <summary>How long does installation take?</summary>
+          <p>Most home systems are installed within a few days once material is on site. Net meter approval depends on your electricity board; we follow it up until it's done.</p>
+        </details>
+        <details>
+          <summary>What maintenance does a solar system need?</summary>
+          <p>Mainly regular panel cleaning — every few weeks in dusty areas — and a yearly check of wiring, earthing and the inverter. We offer cleaning visits and annual maintenance contracts.</p>
+        </details>
+        <details>
+          <summary>What warranties do I get?</summary>
+          <p>Panels usually carry a long manufacturer performance warranty (often 25 years), and inverters typically 5–10 years depending on the brand. We share the exact warranty terms for every component in your proposal.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>SiteLayout.renderFooter();</script>
+</body>
+</html>

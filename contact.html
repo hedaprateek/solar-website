@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Surya Solar Solutions</title>
+  <meta name="description" content="Call, WhatsApp, email or visit us. Talk to a solar expert about panels, inverters, installation, net metering and service.">
+  <meta name="theme-color" content="#0E1B2C">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.className += ' js';</script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="contact">
+<script src="js/layout.js"></script>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span></nav>
+      <p class="eyebrow"><span class="dot"></span>Get in touch</p>
+      <h1>Talk to a solar expert</h1>
+      <p class="lead">Call, WhatsApp or drop us a message. We're happy to answer questions, even if you're only just starting to think about solar.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="contact-cards">
+            <a class="contact-card" data-href="tel" href="#main">
+              <span class="ci"><svg class="icon"><use href="#i-phone"/></svg></span>
+              <span><strong>Call us</strong><span data-text="phone">+91 00000 00000</span></span>
+            </a>
+            <a class="contact-card" data-href="whatsapp" href="#main">
+              <span class="ci ci-wa"><svg class="icon"><use href="#i-whatsapp"/></svg></span>
+              <span><strong>WhatsApp</strong><span>Chat with us</span></span>
+            </a>
+            <a class="contact-card" data-href="mailto" href="#main">
+              <span class="ci"><svg class="icon"><use href="#i-mail"/></svg></span>
+              <span><strong>Email</strong><span data-text="email">hello@yourdomain.com</span></span>
+            </a>
+            <div class="contact-card">
+              <span class="ci"><svg class="icon"><use href="#i-clock"/></svg></span>
+              <span><strong>Working hours</strong><span data-text="hours">Mon – Sat, 9:00 AM – 7:00 PM</span></span>
+            </div>
+            <div class="contact-card wide">
+              <span class="ci"><svg class="icon"><use href="#i-pin"/></svg></span>
+              <span><strong>Office</strong><span data-text="address">Office address, City, State – PIN</span></span>
+            </div>
+          </div>
+          <div class="map" hidden>
+            <iframe title="Office location on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="contact-quote">
+            <p><strong>Planning a new installation?</strong> The quote form asks the right questions up front, so we can come back with a proper estimate.</p>
+            <a href="quote.html" class="btn btn-sun">Get a free quote <svg class="icon"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <h3>Send us a message</h3>
+          <form id="contact-form" data-lead-form data-form-name="Website enquiry" autocomplete="on">
+            <div class="form-grid">
+              <div class="field">
+                <label for="c-name">Name <span class="req">*</span></label>
+                <input id="c-name" name="name" data-label="Name" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="c-phone">Phone <span class="req">*</span></label>
+                <input id="c-phone" name="phone" data-label="Phone" type="tel" required autocomplete="tel" pattern="[0-9+\-\s()]{10,16}" title="Enter a 10-digit mobile number">
+              </div>
+              <div class="field full">
+                <label for="c-email">Email <span class="opt">(optional)</span></label>
+                <input id="c-email" name="email" data-label="Email" type="email" autocomplete="email">
+              </div>
+              <div class="field full">
+                <label for="c-msg">Message <span class="req">*</span></label>
+                <textarea id="c-msg" name="message" data-label="Message" rows="6" required placeholder="How can we help?"></textarea>
+              </div>
+              <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            </div>
+            <div class="form-foot">
+              <p class="form-privacy">We usually reply the same working day.</p>
+              <button type="submit" class="btn btn-dark btn-lg">Send message <svg class="icon"><use href="#i-arrow"/></svg></button>
+            </div>
+            <div class="form-status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>SiteLayout.renderFooter();</script>
+</body>
+</html>
