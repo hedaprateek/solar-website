@@ -33,6 +33,7 @@ Open `js/config.js` and fill in:
 | Setting        | What it is                                                         |
 | -------------- | ------------------------------------------------------------------ |
 | `businessName` | Company name, shown in the header, footer and page titles          |
+| `owner`        | Owner / proprietor name, shown on the Contact page and in the footer |
 | `phone`        | Phone number shown on the site (tap-to-call on mobile)             |
 | `whatsapp`     | WhatsApp number, digits only with country code, e.g. `919812345678` |
 | `email`        | Email address                                                      |
@@ -42,6 +43,8 @@ Open `js/config.js` and fill in:
 | `formEndpoint` | Where form submissions go (see step 3)                             |
 
 Each value appears on every page, so you only need to change it here.
+
+**Anything left empty (`""`) is hidden**, rather than showing a placeholder: the email, address and working-hours lines simply disappear from the top bar, Contact page and footer until you fill them in.
 
 For better search-engine results, also replace the company name in the `<title>` tag at the top of each page.
 

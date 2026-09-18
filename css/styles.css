@@ -469,6 +469,7 @@ a.contact-card:hover { border-color: var(--sun); transform: translateY(-2px); bo
 .contact-card.wide { grid-column: 1 / -1; }
 .contact-card > span:last-child { min-width: 0; font-size: .93rem; color: var(--muted); overflow-wrap: anywhere; }
 .contact-card strong { display: block; color: var(--ink); font-size: .98rem; margin-bottom: 2px; }
+.contact-owner { display: block; margin-top: 2px; font-size: .86rem; }
 .ci { width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 12px; background: var(--sun-soft); color: var(--sun-600); }
 .ci-wa { background: #DCF8E6; color: #128C4A; }
 .map { margin-top: 14px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); background: var(--cream); }

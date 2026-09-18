@@ -65,15 +65,15 @@
 
   var BRAND =
     '<span class="brand-mark"><svg><use href="#i-logo"/></svg></span>' +
-    '<span class="brand-name" data-text="businessName">Surya Solar Solutions</span>';
+    '<span class="brand-name" data-text="businessName">Saitech Energy</span>';
 
   var HEADER =
     SPRITE +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     '<div class="topbar"><div class="container topbar-inner">' +
-      '<a data-href="tel" href="contact.html">' + icon("phone") + '<span data-text="phone">+91 00000 00000</span></a>' +
-      '<a data-href="mailto" href="contact.html">' + icon("mail") + '<span data-text="email">hello@yourdomain.com</span></a>' +
-      '<span>' + icon("clock") + '<span data-text="hours">Mon – Sat, 9:00 AM – 7:00 PM</span></span>' +
+      '<a data-href="tel" href="contact.html">' + icon("phone") + '<span data-text="phone">+91 91464 84242</span></a>' +
+      '<a data-href="mailto" data-optional href="contact.html">' + icon("mail") + '<span data-text="email"></span></a>' +
+      '<span data-optional>' + icon("clock") + '<span data-text="hours"></span></span>' +
       '<a class="topbar-cta" href="quote.html">Book a free site survey ' + icon("arrow") + '</a>' +
     '</div></div>' +
     '<header class="site-header" id="site-header"><div class="container header-inner">' +
@@ -100,6 +100,7 @@
         '<div>' +
           '<a href="index.html" class="brand brand-light">' + BRAND + '</a>' +
           '<p class="footer-blurb">Solar panel sales, installation and service — from site survey and fabrication to inverters, wiring and after-sales care.</p>' +
+          '<p class="footer-blurb" data-optional>Proprietor: <span data-text="owner"></span></p>' +
         '</div>' +
         '<div><h4>Services</h4><ul>' +
           FOOTER_SERVICES.map(function (s) { return '<li><a href="' + s[0] + '">' + s[1] + '</a></li>'; }).join("") +
@@ -109,14 +110,15 @@
           '<li><a href="quote.html">Get a quote</a></li>' +
         '</ul></div>' +
         '<div><h4>Contact</h4><ul class="footer-contact">' +
-          '<li><a data-href="tel" href="contact.html"><span data-text="phone">+91 00000 00000</span></a></li>' +
-          '<li><a data-href="mailto" href="contact.html"><span data-text="email">hello@yourdomain.com</span></a></li>' +
-          '<li><span data-text="address">Office address, City, State – PIN</span></li>' +
-          '<li><span data-text="hours">Mon – Sat, 9:00 AM – 7:00 PM</span></li>' +
+          '<li data-optional><span data-text="owner"></span></li>' +
+          '<li><a data-href="tel" href="contact.html"><span data-text="phone">+91 91464 84242</span></a></li>' +
+          '<li data-optional><a data-href="mailto" href="contact.html"><span data-text="email"></span></a></li>' +
+          '<li data-optional><span data-text="address"></span></li>' +
+          '<li data-optional><span data-text="hours"></span></li>' +
         '</ul></div>' +
       '</div>' +
       '<div class="footer-bottom">' +
-        '<span>© <span data-year>2026</span> <span data-text="businessName">Surya Solar Solutions</span>. All rights reserved.</span>' +
+        '<span>© <span data-year>2026</span> <span data-text="businessName">Saitech Energy</span>. All rights reserved.</span>' +
         '<span class="footer-credit"><b>' + CREDIT_COMPANY + '</b><span class="vf-dot">·</span>by ' + CREDIT_AUTHOR + '</span>' +
       '</div>' +
     '</div></footer>' +

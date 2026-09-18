@@ -9,17 +9,30 @@
   var telNumber = String(C.phone || "").replace(/[^\d+]/g, "");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Business details from config.js ---------- */
+  /* ---------- Business details from config.js ----------
+     A setting left empty in config.js hides whatever would have shown it: the
+     element itself, or the [data-optional] block around it (a contact card, a
+     footer line), so the site never displays a blank or placeholder detail. */
+  function hideFor(el) {
+    (el.closest("[data-optional]") || el).hidden = true;
+  }
+
   $$("[data-text]").forEach(function (el) {
     var value = C[el.getAttribute("data-text")];
     if (value) el.textContent = value;
+    else hideFor(el);
   });
 
   $$("[data-href]").forEach(function (el) {
     var kind = el.getAttribute("data-href");
-    if (kind === "tel" && telNumber) el.href = "tel:" + telNumber;
-    if (kind === "mailto" && C.email) el.href = "mailto:" + C.email;
-    if (kind === "whatsapp" && waNumber) {
+    if (kind === "tel") {
+      if (telNumber) el.href = "tel:" + telNumber; else hideFor(el);
+    }
+    if (kind === "mailto") {
+      if (C.email) el.href = "mailto:" + C.email; else hideFor(el);
+    }
+    if (kind === "whatsapp") {
+      if (!waNumber) { hideFor(el); return; }
       el.href = "https://wa.me/" + waNumber;
       el.target = "_blank";
       el.rel = "noopener";
@@ -27,7 +40,7 @@
   });
 
   // Page titles are written with the default name; swap in the configured one.
-  var DEFAULT_NAME = "Surya Solar Solutions";
+  var DEFAULT_NAME = "Saitech Energy";
   if (C.businessName && C.businessName !== DEFAULT_NAME) {
     document.title = document.title.replace(DEFAULT_NAME, C.businessName);
   }

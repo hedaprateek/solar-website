@@ -1,24 +1,31 @@
 /*
  * SITE SETTINGS
  * Edit this file to put your own business details on the website.
- * Each value appears in several places (top bar, header, contact section,
+ * Each value appears in several places (top bar, header, contact page,
  * footer, WhatsApp button), so you only need to change it here once.
+ *
+ * Anything left empty ("") is HIDDEN on the site — the page simply leaves
+ * that line out instead of showing a placeholder.
  */
 window.SITE_CONFIG = {
-  businessName: "Surya Solar Solutions",
+  businessName: "Saitech Energy",
+
+  // Shown on the Contact page and in the footer.
+  owner: "Piyush Chandak",
 
   // Shown on the site and used for "tap to call".
-  phone: "+91 00000 00000",
+  phone: "+91 91464 84242",
 
   // WhatsApp number: country code + number, digits only (no "+" or spaces).
-  whatsapp: "910000000000",
+  whatsapp: "919146484242",
 
-  email: "hello@yourdomain.com",
-  address: "Office address, City, State – PIN",
-  hours: "Mon – Sat, 9:00 AM – 7:00 PM",
+  // Not set yet — fill these in and they appear automatically.
+  email: "",
+  address: "",
+  hours: "",
 
-  // Google Maps search text for the map in the contact section,
-  // e.g. "Surya Solar Solutions, MG Road, Jaipur". Leave empty to hide the map.
+  // Google Maps search text for the map on the Contact page,
+  // e.g. "Saitech Energy, MG Road, Pune". Leave empty to hide the map.
   mapQuery: "",
 
   // Where the quote and contact forms are sent.
