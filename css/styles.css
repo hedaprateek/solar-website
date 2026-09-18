@@ -28,7 +28,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
-html { scroll-padding-top: calc(var(--header-h) + 16px); }
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+}
 /* Smooth scrolling only after load, so opening a /#section link jumps straight there. */
 html.ready { scroll-behavior: smooth; }
 
@@ -365,12 +368,22 @@ h3 { font-size: 1.2rem; font-weight: 600; }
 .estimator h3 { color: #fff; font-size: 1.35rem; margin-bottom: 22px; }
 .est-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: .92rem; margin-bottom: 12px; }
 .est-label output { font: 700 1.3rem/1 var(--font-head); color: #fff; }
+/* The input is a full 24px tall so it can be grabbed with a thumb; the thin
+   track is drawn by the pseudo-element inside it. */
 .range {
-  -webkit-appearance: none; appearance: none; width: 100%; height: 6px; margin: 0 0 20px;
-  border-radius: 6px; cursor: pointer;
+  -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0 0 14px;
+  background: transparent; cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 6px;
   background: linear-gradient(90deg, var(--sun) var(--p, 5%), rgba(255, 255, 255, .16) var(--p, 5%));
 }
-.range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 5px solid var(--sun); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%;
+  background: #fff; border: 5px solid var(--sun); box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+}
+.range::-moz-range-track { height: 6px; border-radius: 6px; background: rgba(255, 255, 255, .16); }
+.range::-moz-range-progress { height: 6px; border-radius: 6px; background: var(--sun); }
 .range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 5px solid var(--sun); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
 .est-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: .92rem; }
 .est-row input {
@@ -643,6 +656,26 @@ a.contact-card:hover { border-color: var(--sun); transform: translateY(-2px); bo
   .contact-cards, .segments { grid-template-columns: 1fr; }
   .hero-actions .btn { width: 100%; }
   .faq summary { font-size: 1.02rem; }
+}
+
+/* ---------- Touch targets & phones ----------
+   Links and chips get enough height to be tapped comfortably (~44px). */
+.brand { padding-block: 3px; }
+.crumbs a, .site-footer ul a, .footer-contact li > span { display: inline-block; padding-block: 8px; }
+.crumbs a { padding-block: 10px; }
+.site-footer ul { gap: 2px; }
+.filter { padding: .62em 1.05em; }
+
+@media (max-width: 960px) {
+  .nav { max-height: calc(100dvh - var(--header-h)); }
+}
+
+@media (max-width: 720px) {
+  .filter { padding: .78em 1.15em; }
+  .est-row input { min-height: 44px; }
+  .badge small { font-size: .78rem; }
+  .site-footer { padding-bottom: 96px; }  /* keeps the WhatsApp button off the credit line */
+  .wa-float { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
